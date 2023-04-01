@@ -15,7 +15,7 @@ public class Main {
 		for (int i = 0; i < num.length(); i++) {
 			idx--;
 			if(num.charAt(i)-'0'<10) su += Math.pow(B,idx)*(num.charAt(i)-'0');
-			else su += Math.pow(B,idx)*(num.charAt(i)-'7');
+			else su += Math.pow(B,idx)*(num.charAt(i)-'A'+10);
 		}
 		bw.write(su+"");
 		
