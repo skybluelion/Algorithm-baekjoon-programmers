@@ -30,17 +30,16 @@ public class Main {
 	private static int selectionSort() {
 		for (int i = arr.length-1; i >= 0; i--) {
 			if(Arrays.equals(arr, arr2)) return 1;
-			int maxIdx = i ; //최소값의 위치
+			int maxIdx = i ;
 			for (int j = i-1; j >= 0; j--) {
 				if(arr[maxIdx] < arr[j] ) maxIdx = j;
 			}
 			swap(maxIdx, i);
-			if(Arrays.equals(arr, arr2)) return 1;
 		}
 		return 0;
 	}
 	
-	private static void swap(int i, int j) { // i, j번째 인덱스의 값 교환
+	private static void swap(int i, int j) {
 		int temp = arr[i];
 		arr[i] = arr[j];
 		arr[j] = temp;
