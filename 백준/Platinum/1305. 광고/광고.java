@@ -22,7 +22,6 @@ public class Main {
 		int leng = adString.length();
 		int[] arr = new int[leng]; // 해당 문자열의 접두사와 접미사 동일한 개수 담는 배열
 		int index = 0; //접두사 탐색 위치
-		int max = 0;
 		
 		// 문자가 같을때 && 연달아 같지 않을때 idx = table[idx-1], 즉
 		//abaab
@@ -35,7 +34,6 @@ public class Main {
 				
 			if(adString.charAt(i) == adString.charAt(index)) {
 				arr[i] = ++index;
-				max = Math.max(max, arr[i]);
 			}
 		}
 		return arr[leng - 1];
