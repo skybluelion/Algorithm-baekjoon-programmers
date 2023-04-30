@@ -5,17 +5,12 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		
-		while(true) {
-			String s = br.readLine();
-			if(s.equals(".")) break;
-			bw.write(kmp(s)+"\n");
+		StringBuilder sb = new StringBuilder();
+		String s;
+		while(!(s = br.readLine()).equals(".")) {
+			sb.append(kmp(s)).append("\n");
 		}
-			
-		
-		bw.flush();
-		bw.close();
+		System.out.print(sb.toString());
 		br.close();
 	}//main
 	private static int kmp(String s) {
