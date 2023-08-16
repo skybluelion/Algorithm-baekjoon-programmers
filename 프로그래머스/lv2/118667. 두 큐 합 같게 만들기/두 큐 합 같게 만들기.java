@@ -50,7 +50,7 @@ class Solution {
 			answer++;
         	
             // 큐1, 2의 길이는 같고 2번씩 반복하면 처음과 같아지므로 불가능한 경우
-            if (answer >= (queue1.length * 2) * 2) 
+            if (answer >= queue1.length * 3) 
             return -1;
 		}
 		
