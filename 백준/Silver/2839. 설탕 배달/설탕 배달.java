@@ -1,35 +1,32 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 
 
 public class Main {
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		
-		int N = Integer.parseInt(br.readLine());
-		int sum = 0;
-		
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        int five = n / 5;
+        int three = 0;
+        while(true) {
+            if (five == 0){
+                if(0 == n % 3){
+                    three = n / 3;
+                    System.out.println(three);
+                    break;
+                }else {
+                    System.out.println(-1);
+                    break;
+                }
+            }
 
-		for (int i = 0; i <= N/5; i++) {
-			for (int j = 0; j <= N/3; j++) {
-				if(N == j*3+i*5) {
-					sum=i+j;
-					break;
-				}
-				
-			}
-		}
-		if(sum == 0) bw.write(-1+"");
-		else bw.write(sum+"");
-		
-		bw.flush();
-		bw.close();
-		br.close();
-	}
-
+            if(0 == (n - five * 5) % 3){
+                three = (n - five * 5) / 3;
+                System.out.println(five + three);
+                break;
+            }
+            five --;
+        }
+        br.close();
+    }
 }
