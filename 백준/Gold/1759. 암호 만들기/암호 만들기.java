@@ -1,64 +1,74 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Main {
 
-	static int C, L;
-	static String[] strs; // 선택한 문자열
-	static String[] arr; // 사용자 입력 배열
-	
-	static int mo;
-	static int ja;
-	
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		L = sc.nextInt();
-		C = sc.nextInt();
-		strs = new String[L];
-		arr = new String[C];
-		
-		for (int i = 0; i < C; i++) {
-			arr[i] = sc.next();
-		}
-		Arrays.sort(arr);
+    static int L, C;
+    static String[] strTemp;
+    static String[] arr;
+    static boolean flag;
+    static StringBuilder sb = new StringBuilder();
 
-		comb(0, 0);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-	}
-	
-	
-	//cnt : cnt번째 문자열 뽑기
-	//startIndex : arr에서 startIndex부터 문자열 뽑기 -> 따라서 isSelected로 중복 확인 안해도됨.
-	private static void comb(int cnt, int startIndex) {
-		if(cnt == L) {
-			haveStr();
-			if(mo >= 1 && ja >= 2) {
-				for (int i = 0; i < strs.length; i++) {
-					System.out.print(strs[i]);
-				}
-				System.out.println();
-				
-			}
-			return;
-		}
-		for (int i = startIndex; i < C; i++) {
-			strs[cnt] = arr[i]; //cnt번째 숫자를 배열의 i번째 숫자로 지정
-			comb(cnt+1, i+1);
-		}
-	}
-	
-	private static void haveStr() {
-		mo = 0;
-		ja = 0;
-		for(String str : strs) {
-			if(str.equals("a") || str.equals("e") || str.equals("i") || str.equals("o") || str.equals("u")) {
-				mo++;
-			} else {
-				ja++;
-			}	
-		}
-		return;
-	}
+        L = Integer.parseInt(st.nextToken());
+        C = Integer.parseInt(st.nextToken());
+        strTemp = new String[L];
+        arr = new String[C];
 
+        st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < C; i++) {
+            arr[i] = st.nextToken();
+        }
+        Arrays.sort(arr);
+
+        dfs(0, 0);
+        System.out.println(sb);
+    }
+
+
+    //depth : 문자열 뽑을 차례
+    private static void dfs(int startIndex, int depth) {
+        if(depth == L) {
+            // 한줄씩 출력
+            haveMo();
+            if(flag) {
+                for(String s : strTemp) {
+                    sb.append(s);
+                }
+                sb.append("\n");
+            }
+            return;
+        }else {
+            // 순서 있는 조합
+            for (int i = startIndex; i < C; i++) {
+                strTemp[depth] = arr[i];
+                dfs(i + 1, depth + 1);
+            }
+        }
+    }
+
+    private static void haveMo() {
+        flag = false;
+        int mo = 0;
+        int ja = 0;
+        for(String str : strTemp) {
+            if(str.equals("a") || str.equals("e") || str.equals("i") || str.equals("o") || str.equals("u")) {
+                mo++;
+            }else {
+                ja++;
+            }
+            if(mo >= 1 && ja >= 2){
+                flag = true;
+                return;
+            }
+        }
+        return;
+    }
 }
 
