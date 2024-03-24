@@ -4,7 +4,6 @@ class Solution {
         
         for(int i = n / 2; i >= 0; i--){
             if(a == b) break;
-            
             if(a % 2 == 1) a += 1;
             a /= 2;
             
